@@ -1,0 +1,3 @@
+rootProject.name = 'CounterV2'
+
+include ':app'
