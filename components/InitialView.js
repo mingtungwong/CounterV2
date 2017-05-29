@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => {
             for(let i = 0; i < numPlayers; i++) {
                 playersArray[i] = {name: `Player ${i + 1}`, points: +startingPoints};
             }
-            dispatch(setPlayers(playersArray));
+            dispatch(setPlayers(playersArray, startingPoints));
         }
     }
 }

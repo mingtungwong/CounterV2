@@ -1,12 +1,15 @@
 const SET_PLAYERS = 'SET_PLAYERS';
 const UPDATE_PLAYER = 'UPDATE_PLAYER';
 const ADD_PLAYER = 'ADD_PLAYER';
-const SET_START_POINTS = 'SET_START_POINTS'
+const SET_START_POINTS = 'SET_START_POINTS';
 
-export const setPlayers = (players) => {
+export const setPlayers = (players, startPoints) => {
     return {
         type: SET_PLAYERS,
-        payload: players
+        payload: {
+            players,
+            startPoints
+        }
     }
 }
 
@@ -44,8 +47,8 @@ export default function reducer (state = initialState, action) {
     let newState = Object.assign({}, state);
     switch(action.type) {
         case SET_PLAYERS:
-            newState.counters = state.counters.concat(action.payload);
-            newState.startPoints = action.payload[0].points;
+            newState.counters = action.payload.players;
+            newState.startPoints = action.payload.startPoints;
             break;
         case UPDATE_PLAYER: {
             const obj = action.payload;
@@ -62,6 +65,6 @@ export default function reducer (state = initialState, action) {
         default:
             return newState;
     }
-    
+
     return newState;
 }

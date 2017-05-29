@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import updatePlayer from '../reducers/counterReducer';
+import { updatePlayer } from '../reducers/counterReducer';
 
 class SingleCounter extends Component {
     constructor(props) {
@@ -18,14 +18,25 @@ class SingleCounter extends Component {
             name: props.name,
             points: props.points
         }
+        this.changePoints = this.changePoints.bind(this);
+        this.changeName = this.changeName.bind(this);
     }
 
     changePoints(amount) {
+        this.setState({points: this.state.points + amount});
         this.props.update(this.props.id, this.state.name, this.state.points + amount);
     }
 
     changeName(name) {
+        this.setState({ name });
         this.props.update(this.props.id, name, this.state.points);
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState({
+            name: newProps.name,
+            points: newProps.points
+        })
     }
 
     render() {
@@ -36,17 +47,18 @@ class SingleCounter extends Component {
                         maxLength = { 10 }
                         defaultValue = { this.props.name }
                         style = {{textAlign: 'center'}}
+                        onChangeText = {this.changeName}
                     />
                 </View>
                 <View style = {styles.container2}>
                     <Button
                         title = '-'
-                        onPress = {() => this.setState({points: this.state.points - 1})}
+                        onPress = {() => this.changePoints(-1)}
                     />
                     <Text style={{fontWeight: 'bold', fontSize: 20, color: 'black'}}>{this.state.points}</Text>
                     <Button
                         title = '+'
-                        onPress = {() => this.setState({points: this.state.points + 1})}
+                        onPress = {() => this.changePoints(1)}
                     />
                 </View>
             </View>
@@ -72,6 +84,12 @@ const styles = StyleSheet.create({
     }
 })
 
+const mapStateToProps = (state) => {
+    return {
+        counters: state.counters.counters
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         update: (id, name, points) => {
@@ -80,4 +98,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(SingleCounter);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleCounter);
