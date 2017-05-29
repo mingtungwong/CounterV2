@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import {
     Text,
     ScrollView,
+    View,
     Button,
-    StyleSheet
+    StyleSheet,
+    Dimensions
 } from 'react-native';
 
-import SingleCounter from './SingleCounter'
+import { addPlayer } from '../reducers/counterReducer';
+import SingleCounter from './SingleCounter';
 
 class CountersContainer extends Component {
 
@@ -21,8 +24,14 @@ class CountersContainer extends Component {
 
         return (
             <ScrollView>
+                <View>
+                    <Button
+                        title = 'Add Player'
+                        onPress = {this.props.addPlayer}
+                    />
+                </View>
                 {
-                    counters.map((obj, idx) => <SingleCounter name={ obj.name } points={ obj.points } key={ idx }/>)
+                    counters.map((obj, idx) => <SingleCounter id ={ idx } name={ obj.name } points={ obj.points } key={ idx }/>)
                 }
             </ScrollView>
         );
@@ -32,13 +41,16 @@ class CountersContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        counters: state.counters
+        counters: state.counters.counters,
+        startingPoints: state.counters.startPoints
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        addPlayer: () => {
+            dispatch(addPlayer())
+        }
     }
 }
 

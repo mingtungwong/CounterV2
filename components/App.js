@@ -15,7 +15,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.props.counters);
         return (
             <View>
                 {
@@ -30,7 +29,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        counters: state.counters
+        counters: state.counters.counters
     }
 }
 

@@ -7,13 +7,25 @@ import {
     StyleSheet,
     Dimensions
 } from 'react-native';
+import { connect } from 'react-redux';
+
+import updatePlayer from '../reducers/counterReducer';
 
 class SingleCounter extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: props.name,
             points: props.points
         }
+    }
+
+    changePoints(amount) {
+        this.props.update(this.props.id, this.state.name, this.state.points + amount);
+    }
+
+    changeName(name) {
+        this.props.update(this.props.id, name, this.state.points);
     }
 
     render() {
@@ -60,4 +72,12 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SingleCounter;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        update: (id, name, points) => {
+            dispatch(updatePlayer(id, name, points));
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SingleCounter);
