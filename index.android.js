@@ -13,8 +13,8 @@ import {
 } from 'react-native';
 import { Provider } from 'react-redux';
 
+import App from './components/App'
 import store from './store/store';
-import InitialView from './components/InitialView';
 
 export default class CounterV2 extends Component {
 
@@ -23,12 +23,11 @@ export default class CounterV2 extends Component {
   }
 
   render() {
+    console.log(store.getState());
     return (
       <Provider store={store}>
         {
-          store.getState().counters.length
-          ? <Text>test</Text>
-          : <InitialView />
+          <App />
         }
       </Provider>
     );
