@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import InitialView from './InitialView';
+import CountersContainer from './CountersContainer';
 
 class App extends Component {
 
@@ -20,7 +21,7 @@ class App extends Component {
                 {
                     this.props.counters.length === 0
                     ? <InitialView />
-                    : <Text>{this.props.counters.length}</Text>
+                    : <CountersContainer />
                 }
             </View>
         )
