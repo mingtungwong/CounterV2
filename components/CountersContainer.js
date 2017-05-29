@@ -32,7 +32,7 @@ class CountersContainer extends Component {
     render() {
         return (
             <ScrollView>
-                <View>
+                <View style={styles.container} >
                     <Button
                         title = 'Add Player'
                         onPress = {this.props.addPlayer}
@@ -73,8 +73,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center'
+        justifyContent: 'space-between',
     }
 })
 

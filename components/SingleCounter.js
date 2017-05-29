@@ -51,6 +51,7 @@ class SingleCounter extends Component {
                     />
                 </View>
                 <View style = {styles.container2}>
+                    <View></View>
                     <Button
                         title = '-'
                         onPress = {() => this.changePoints(-1)}
@@ -60,6 +61,7 @@ class SingleCounter extends Component {
                         title = '+'
                         onPress = {() => this.changePoints(1)}
                     />
+                    <View></View>
                 </View>
             </View>
         );
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     container2: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center'
     },
     nameBox: {
